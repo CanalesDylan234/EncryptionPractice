@@ -9,24 +9,32 @@ namespace EncryptionPractice.Models
 {
     internal class Encryption
     {
-        public static string HashString(string passwordString)
+        //
+        public static string HashPasswordSalt(string password, string salt)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in GetHash(passwordString))
-                sb.Append(b.ToString("X3"));
-                return sb.ToString();
+            using (var sha256 = SHA256.Create())
+            {
+                var saltedPassword = password + salt;
+                var saltedPasswordBytes = Encoding.UTF8.GetBytes(saltedPassword);
+                var hashBytes = sha256.ComputeHash(saltedPasswordBytes);
+                return Convert.ToBase64String(hashBytes);
+            }
         }
 
-        public static byte[] GetHash(string passwordString) 
+        // Generates a unique salt for each user 
+        public static string GenerateSalt(int size = 16)
         {
-            using (HashAlgorithm algorithm = SHA256.Create())
-                return algorithm.ComputeHash(Encoding.UTF8.GetBytes(passwordString));
+            var rng = new RNGCryptoServiceProvider();
+            var saltBytes = new byte[size];
+            rng.GetBytes(saltBytes);
+            return Convert.ToBase64String(saltBytes);
         }
 
-        public static bool VerifyHash(String password, string hash)
+        //
+        public static bool VerifyPassword(string enteredPassword, string storedSalt, string storedHash)
         {
-            password = HashString(password);
-            return StringComparer.OrdinalIgnoreCase.Equals(password, hash);
+            string hashedEnteredPassword = HashPasswordSalt(enteredPassword, storedSalt);
+            return StringComparer.OrdinalIgnoreCase.Equals(hashedEnteredPassword, storedHash);
         }
     }
 }

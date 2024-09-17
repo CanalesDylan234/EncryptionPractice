@@ -25,13 +25,19 @@ namespace EncryptionPractice
                 _userData.username = txtUserLog.Text;
                 _userData.password = txtPassLog.Text;
 
-                using(PracticeEncryptionEntities db = new PracticeEncryptionEntities())
+                using(PracticeEncryption db = new PracticeEncryption())
                 {
-                    var _getUser = db.UserInfoes.FirstOrDefault(d =>  d.Username == _userData.username);
-                    
+                    var _getUser = db.UserTests.FirstOrDefault(d => d.Username == _userData.username);
                     if (_getUser != null)
                     {
-                        if(Models.Encryption.VerifyHash(_userData.password, _getUser.Password))
+                        //
+                        string storedSalt = _getUser.Salt;
+
+                        //
+                        string hashedPassword = Models.Encryption.HashPasswordSalt(_userData.password, storedSalt);
+
+                        //
+                        if(hashedPassword == _getUser.Password)
                         {
                             MessageBox.Show($"Login Successful! Welcome: {_getUser.Username}");
                         }

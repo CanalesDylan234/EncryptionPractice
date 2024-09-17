@@ -19,17 +19,29 @@ namespace EncryptionPractice
 
         private void btnRegisterReg_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(txtUserReg.Text) || !String.IsNullOrEmpty(txtPassReg.Text))
+            if (!String.IsNullOrEmpty(txtUserReg.Text) && !String.IsNullOrEmpty(txtPassReg.Text))
             {
-                using (PracticeEncryptionEntities db = new PracticeEncryptionEntities())
+                using (PracticeEncryption db = new PracticeEncryption())
                 {
                     try
                     {
-                        UserInfo _user = new UserInfo();
+                        //
+                        string salt = Models.Encryption.GenerateSalt();
+
+                        //
+                        string hashedPassword = Models.Encryption.HashPasswordSalt(txtPassReg.Text, salt);
+
+                        //
+                        UserTest _user = new UserTest();
+
+                        // Store Username, hashed password, and salt 
                         _user.Username = txtUserReg.Text;
-                        _user.Password = Models.Encryption.HashString(txtPassReg.Text);
+                        _user.Password = hashedPassword;
+                        _user.Salt = salt;
                         _user.Date = DateTime.Now;
-                        db.UserInfoes.Add(_user);
+
+                        //
+                        db.UserTests.Add(_user);
                         db.SaveChanges();
 
                         MessageBox.Show($"Register Successful! Please Login: {txtUserReg.Text}", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);

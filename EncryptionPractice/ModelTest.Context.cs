@@ -13,10 +13,10 @@ namespace EncryptionPractice
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PracticeEncryptionEntities : DbContext
+    public partial class PracticeEncryption : DbContext
     {
-        public PracticeEncryptionEntities()
-            : base("name=PracticeEncryptionEntities")
+        public PracticeEncryption()
+            : base("name=PracticeEncryption")
         {
         }
     
@@ -25,6 +25,6 @@ namespace EncryptionPractice
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<UserInfo> UserInfoes { get; set; }
+        public virtual DbSet<UserTest> UserTests { get; set; }
     }
 }

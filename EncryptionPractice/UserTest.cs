@@ -12,11 +12,12 @@ namespace EncryptionPractice
     using System;
     using System.Collections.Generic;
     
-    public partial class UserInfo
+    public partial class UserTest
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Salt { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
     }
 }
