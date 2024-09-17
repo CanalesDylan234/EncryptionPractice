@@ -57,5 +57,14 @@ namespace EncryptionPractice
                 MessageBox.Show("Please Verify and Ensure Usernname/Password is typed in before logging in!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+            Login _login = new Login();
+            _login.Show();
+
+        }
     }
 }

@@ -34,6 +34,7 @@
             this.lblPassReg = new System.Windows.Forms.Label();
             this.lblUserReg = new System.Windows.Forms.Label();
             this.lblReg = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtPassReg
@@ -96,12 +97,25 @@
             this.lblReg.TabIndex = 10;
             this.lblReg.Text = "Register Here!";
             // 
+            // btnBack
+            // 
+            this.btnBack.AutoSize = true;
+            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Location = new System.Drawing.Point(187, 261);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(75, 27);
+            this.btnBack.TabIndex = 11;
+            this.btnBack.Text = "Go Back!";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(55)))), ((int)(((byte)(153)))));
             this.ClientSize = new System.Drawing.Size(484, 411);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lblReg);
             this.Controls.Add(this.lblPassReg);
             this.Controls.Add(this.lblUserReg);
@@ -109,6 +123,7 @@
             this.Controls.Add(this.txtPassReg);
             this.Controls.Add(this.txtUserReg);
             this.Name = "Register";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Register: Next For Windows";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -123,5 +138,6 @@
         private System.Windows.Forms.Label lblPassReg;
         private System.Windows.Forms.Label lblUserReg;
         private System.Windows.Forms.Label lblReg;
+        private System.Windows.Forms.Button btnBack;
     }
 }

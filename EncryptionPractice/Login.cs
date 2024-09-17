@@ -30,14 +30,9 @@ namespace EncryptionPractice
                     var _getUser = db.UserTests.FirstOrDefault(d => d.Username == _userData.username);
                     if (_getUser != null)
                     {
-                        //
-                        string storedSalt = _getUser.Salt;
 
                         //
-                        string hashedPassword = Models.Encryption.HashPasswordSalt(_userData.password, storedSalt);
-
-                        //
-                        if(hashedPassword == _getUser.Password)
+                        if(Models.Encryption.VerifyPassword(_userData.password, _getUser.Salt, _getUser.Password))
                         {
                             MessageBox.Show($"Login Successful! Welcome: {_getUser.Username}");
                         }
@@ -62,6 +57,8 @@ namespace EncryptionPractice
         {
             Register _reg = new Register();
             _reg.Show();
+
+            this.Hide();
         }
     }
 }
